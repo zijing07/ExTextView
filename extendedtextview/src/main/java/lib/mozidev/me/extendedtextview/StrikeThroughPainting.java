@@ -33,12 +33,12 @@ public class StrikeThroughPainting implements IPainting {
      */
     public static final int MODE_LINES_TOGETHER = 1;
 
-    private static final float STRIKE_THROUGH_POSITION = 0.7F;
+    private static final float STRIKE_THROUGH_POSITION = 0.65F;
     /**
      * Because the `first line top padding` is smaller, adjust the strike through
      * line position from 0.7 to 0.6, to make the line in the center of texts.
      */
-    private static final float STRIKE_THROUGH_FIRST_LINE_OFFSET = 0.1F;
+    private static final float STRIKE_THROUGH_FIRST_LINE_POSITION = 0.6F;
     private static final float STRIKE_THROUGH_STROKE_WIDTH = 2F;
     private static final int STRIKE_THROUGH_COLOR = Color.BLACK;
     private static final long STRIKE_THROUGH_TOTAL_TIME = 1_000L;
@@ -55,8 +55,7 @@ public class StrikeThroughPainting implements IPainting {
 
     private float strikeThroughProgress = 0F;
     private float strikeThroughPosition = STRIKE_THROUGH_POSITION;
-    private float strikeThroughFirstLinePosition = STRIKE_THROUGH_POSITION -
-            STRIKE_THROUGH_FIRST_LINE_OFFSET;
+    private float strikeThroughFirstLinePosition = STRIKE_THROUGH_FIRST_LINE_POSITION;
     private int strikeThroughColor = STRIKE_THROUGH_COLOR;
     private float strikeThroughStrokeWidth = STRIKE_THROUGH_STROKE_WIDTH;
     private long strikeThroughTotalTime = STRIKE_THROUGH_TOTAL_TIME;
@@ -231,7 +230,7 @@ public class StrikeThroughPainting implements IPainting {
         float lineHeightOffset = targetView.getLineHeight() * lineIndex
                 + textHeight * linePosition;
         float howFarToGo = distance == -1 ? rect.width() : distance;
-        canvas.drawLine(rect.left, lineHeightOffset, howFarToGo, lineHeightOffset, paint);
+        canvas.drawLine(rect.left, lineHeightOffset, rect.left + howFarToGo, lineHeightOffset, paint);
         return howFarToGo;
     }
 
