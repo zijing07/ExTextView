@@ -31,7 +31,7 @@ public class StrikeThroughPainting implements IPainting {
      * But when there are multiple lines, all lines' strike through lines
      * are drawn simultaneously.
      */
-    public static final int MODE_ALL_LINE_TOGETHER = 1;
+    public static final int MODE_LINES_TOGETHER = 1;
 
     private static final float STRIKE_THROUGH_POSITION = 0.7F;
     /**
@@ -136,12 +136,12 @@ public class StrikeThroughPainting implements IPainting {
 
     /**
      * Change strike through drawing mode
-     * @param mode one of {@value #MODE_DEFAULT} and {@value #MODE_ALL_LINE_TOGETHER}
+     * @param mode one of {@value #MODE_DEFAULT} and {@value #MODE_LINES_TOGETHER}
      */
     public StrikeThroughPainting mode(int mode) {
-        if (mode != MODE_DEFAULT && mode != MODE_ALL_LINE_TOGETHER) {
+        if (mode != MODE_DEFAULT && mode != MODE_LINES_TOGETHER) {
             throw new IllegalArgumentException("Mode must be one of MODE_DEFAULT and " +
-                    "MODE_ALL_LINE_TOGETHER");
+                    "MODE_LINES_TOGETHER");
         }
         this.strikeThroughMode = mode;
         return this;
@@ -179,25 +179,9 @@ public class StrikeThroughPainting implements IPainting {
         targetView.invalidate();
     }
 
-    private Paint rectPaint = new Paint();
-
     @Override
     public void onDraw(@NonNull Canvas canvas) {
-
-//        rectPaint.setColor(Color.BLUE);
-//        if (lineRects != null) {
-//            for (Rect rect : lineRects) {
-//                canvas.drawLine(rect.left, rect.bottom, rect.right, rect.bottom, rectPaint);
-//            }
-//        }
-//        rectPaint.setColor(Color.RED);
-//        if (lineRects != null) {
-//            for (Rect rect : lineRects) {
-//                canvas.drawLine(rect.left, rect.top, rect.right, rect.top, rectPaint);
-//            }
-//        }
-
-        if (!drawStrikeThrough || textHeight == 0F) {
+        if (!drawStrikeThrough || textHeight == 0F || lineRects == null) {
             return ;
         }
         canvas.save();
@@ -206,7 +190,8 @@ public class StrikeThroughPainting implements IPainting {
             case MODE_DEFAULT:
                 drawDefault(canvas);
                 break;
-            case MODE_ALL_LINE_TOGETHER:
+            case MODE_LINES_TOGETHER:
+                drawAllTogether(canvas);
                 break;
         }
 
@@ -248,6 +233,14 @@ public class StrikeThroughPainting implements IPainting {
         float howFarToGo = distance == -1 ? rect.width() : distance;
         canvas.drawLine(rect.left, lineHeightOffset, howFarToGo, lineHeightOffset, paint);
         return howFarToGo;
+    }
+
+    private void drawAllTogether(@NonNull Canvas canvas) {
+        for (int i = 0; i < lineRects.size(); ++i) {
+            Rect rect = lineRects.get(i);
+            float distance = rect.width() * strikeThroughProgress;
+            drawStrikeThroughLine(canvas, i, distance);
+        }
     }
 
     private void drawDefault(@NonNull Canvas canvas) {
@@ -318,7 +311,7 @@ public class StrikeThroughPainting implements IPainting {
             case MODE_DEFAULT:
                 calcAnimTotalDistance();
                 break;
-            case MODE_ALL_LINE_TOGETHER:
+            case MODE_LINES_TOGETHER:
                 // ignore
                 break;
         }

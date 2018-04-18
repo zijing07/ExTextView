@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tv.setText(VERY_LONG_TEXT);
                 strikeThroughPainting
-                        .mode(StrikeThroughPainting.MODE_DEFAULT)
+                        .mode(StrikeThroughPainting.MODE_LINES_TOGETHER)
                         .strikeThrough();
             }
         });
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tv.setText(MULTIPLE_LINES_TEXT);
                 strikeThroughPainting
-                        .mode(StrikeThroughPainting.MODE_DEFAULT)
+                        .mode(StrikeThroughPainting.MODE_LINES_TOGETHER)
                         .strikeThrough();
             }
         });
