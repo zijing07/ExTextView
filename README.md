@@ -10,7 +10,7 @@ Android Extended TextView.
 - What else to extend? Please feel free to tell via opening an issue.
 
 # Demo
-![demo](demo.webm)
+![demo](demo.gif)
 
 # Something Else
 
