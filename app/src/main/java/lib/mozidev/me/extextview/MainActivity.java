@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
             "because we can\n" +
             "For the good of all of us.\n" +
             "Except the ones who are dead.";
+    private static final String VERY_LONG_TEXT = "Early work on the Aperture Science Handheld Portal Device began; the early version, called the Aperture Science Portable Quantum Tunneling Device, proved to be too bulky for effective use, while poor surface conductors for the portals often caused mangling or death of the test subjects when they tried to use the portals.";
 
     private StrikeThroughPainting strikeThroughPainting = null;
 
@@ -30,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tv.setText(SINGLE_LINE_TEXT);
-                strikeThroughPainting.strikeThrough();
+                strikeThroughPainting.strokeWidth(5).strikeThrough();
             }
         });
 
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setText(MULTIPLE_LINES_TEXT);
+                tv.setText(VERY_LONG_TEXT);
                 strikeThroughPainting
                         .mode(StrikeThroughPainting.MODE_DEFAULT)
                         .strikeThrough();
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tv.setText(MULTIPLE_LINES_TEXT);
                 strikeThroughPainting
-                        .mode(StrikeThroughPainting.MODE_ALL_LINE_TOGETHER)
+                        .mode(StrikeThroughPainting.MODE_DEFAULT)
                         .strikeThrough();
             }
         });
