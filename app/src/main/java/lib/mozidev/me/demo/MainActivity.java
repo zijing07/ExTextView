@@ -125,10 +125,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 strikeThroughPainting
+                        // default to true
                         .cutTextEdge(cutEdge)
+                        // default to Color.BLACK
                         .color(strokeColor)
+                        // default to 2F px
                         .strokeWidth(strokeWidth)
+                        // default to StrikeThroughPainting.MODE_DEFAULT
                         .mode(StrikeThroughPainting.MODE_DEFAULT)
+                        // default to 0.65F
+                        .linePosition(0.65F)
+                        // default to 0.6F, since the first line is calculated
+                        // differently to the following lines
+                        .firstLinePosition(0.6F)
+                        // default to 1_000 milliseconds, aka 1s
+                        .totalTime(10_000L)
+                        // default to null
                         .callback(new StrikeThroughPainting.StrikeThroughPaintingCallback() {
                             @Override
                             public void onStrikeThroughEnd() {
@@ -136,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                         "Callback after animation", Snackbar.LENGTH_LONG).show();
                             }
                         })
+                        // do the draw!
                         .strikeThrough();
             }
         });
