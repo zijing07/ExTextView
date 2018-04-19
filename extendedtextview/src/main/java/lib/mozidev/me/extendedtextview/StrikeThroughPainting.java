@@ -128,9 +128,11 @@ public class StrikeThroughPainting implements IPainting {
     /**
      * Set callback called when the strike through drawing animation ends
      * @param callback StrikeThroughPaintingCallback
+     * @return this
      */
-    public void callback(@NonNull StrikeThroughPaintingCallback callback) {
-        strikeThroughPaintingCallback = callback;
+    public StrikeThroughPainting callback(@NonNull StrikeThroughPaintingCallback callback) {
+        this.strikeThroughPaintingCallback = callback;
+        return this;
     }
 
     /**

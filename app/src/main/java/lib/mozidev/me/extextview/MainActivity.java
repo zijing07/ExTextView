@@ -2,6 +2,7 @@ package lib.mozidev.me.extextview;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -117,6 +118,25 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     tv.setGravity(Gravity.NO_GRAVITY);
                 }
+            }
+        });
+
+        findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                strikeThroughPainting
+                        .cutTextEdge(cutEdge)
+                        .color(strokeColor)
+                        .strokeWidth(strokeWidth)
+                        .mode(StrikeThroughPainting.MODE_DEFAULT)
+                        .callback(new StrikeThroughPainting.StrikeThroughPaintingCallback() {
+                            @Override
+                            public void onStrikeThroughEnd() {
+                                Snackbar.make(findViewById(R.id.container),
+                                        "Callback after animation", Snackbar.LENGTH_LONG).show();
+                            }
+                        })
+                        .strikeThrough();
             }
         });
 
