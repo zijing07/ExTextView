@@ -1,4 +1,4 @@
-package lib.mozidev.me.extendedtextview;
+package lib.mozidev.me.extextview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -46,7 +46,7 @@ public class StrikeThroughPainting implements IPainting {
     private static final boolean STRIKE_THROUGH_CUT_TEXT_EDGE = true;
 
     @NonNull
-    private ExtendedTextView targetView;
+    private ExTextView targetView;
     @Nullable
     private StrikeThroughPaintingCallback strikeThroughPaintingCallback = null;
     private Paint paint = new Paint();
@@ -62,7 +62,7 @@ public class StrikeThroughPainting implements IPainting {
     private int strikeThroughMode = STRIKE_THROUGH_MODE;
     private boolean strikeThroughCutTextEdge = STRIKE_THROUGH_CUT_TEXT_EDGE;
 
-    public StrikeThroughPainting(@NonNull ExtendedTextView targetView) {
+    public StrikeThroughPainting(@NonNull ExTextView targetView) {
         this.targetView =targetView;
         this.targetView.addPainting(this);
         paint.setColor(strikeThroughColor);

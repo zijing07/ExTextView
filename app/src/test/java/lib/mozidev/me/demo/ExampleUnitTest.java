@@ -1,4 +1,4 @@
-package lib.mozidev.me.extendedtextview;
+package lib.mozidev.me.demo;
 
 import org.junit.Test;
 

@@ -7,7 +7,7 @@
     android:id="@+id/container"
     tools:context=".MainActivity">
 
-    <lib.mozidev.me.extendedtextview.ExtendedTextView
+    <lib.mozidev.me.extextview.ExTextView
         android:id="@+id/extendedTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

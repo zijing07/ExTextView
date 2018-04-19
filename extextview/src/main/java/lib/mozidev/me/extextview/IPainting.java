@@ -1,4 +1,4 @@
-package lib.mozidev.me.extendedtextview;
+package lib.mozidev.me.extextview;
 
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;

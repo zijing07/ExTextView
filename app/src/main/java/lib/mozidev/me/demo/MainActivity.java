@@ -1,4 +1,4 @@
-package lib.mozidev.me.extextview;
+package lib.mozidev.me.demo;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.widget.Switch;
 import java.util.Arrays;
 import java.util.List;
 
-import lib.mozidev.me.extendedtextview.ExtendedTextView;
-import lib.mozidev.me.extendedtextview.StrikeThroughPainting;
+import lib.mozidev.me.extextview.ExTextView;
+import lib.mozidev.me.extextview.StrikeThroughPainting;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final ExtendedTextView tv = findViewById(R.id.extendedTextView);
+        final ExTextView tv = findViewById(R.id.extendedTextView);
         strikeThroughPainting = new StrikeThroughPainting(tv);
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {

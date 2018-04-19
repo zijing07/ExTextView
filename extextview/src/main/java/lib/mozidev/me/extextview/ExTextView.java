@@ -1,4 +1,4 @@
-package lib.mozidev.me.extendedtextview;
+package lib.mozidev.me.extextview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,20 +12,20 @@ import java.util.List;
 /**
  * created by zijing on 17/04/2018
  */
-public class ExtendedTextView extends AppCompatTextView {
+public class ExTextView extends AppCompatTextView {
 
     @Nullable
     private List<IPainting> paintings = null;
 
-    public ExtendedTextView(Context context) {
+    public ExTextView(Context context) {
         this(context, null);
     }
 
-    public ExtendedTextView(Context context, AttributeSet attrs) {
+    public ExTextView(Context context, AttributeSet attrs) {
         this(context, attrs, android.R.attr.textViewStyle);
     }
 
-    public ExtendedTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ExTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

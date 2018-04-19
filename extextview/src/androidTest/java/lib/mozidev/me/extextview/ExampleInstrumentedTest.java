@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("lib.mozidev.me.extextview", appContext.getPackageName());
+        assertEquals("lib.mozidev.me.extendedtextview.test", appContext.getPackageName());
     }
 }

@@ -1,1 +1,1 @@
-include ':app', ':extendedtextview'
+include ':app', ':extextview'
