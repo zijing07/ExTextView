@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class StrikeThroughPainting implements IPainting {
     private static final long STRIKE_THROUGH_TOTAL_TIME = 1_000L;
     private static final int STRIKE_THROUGH_MODE = MODE_DEFAULT;
     private static final boolean STRIKE_THROUGH_CUT_TEXT_EDGE = true;
+    private static final float STRIKE_THROUGH_BASE_LINE_TOP = (6.0f / 21.0f);
 
     @NonNull
     private ExTextView targetView;
@@ -56,6 +58,7 @@ public class StrikeThroughPainting implements IPainting {
     private float strikeThroughProgress = 0F;
     private float strikeThroughPosition = STRIKE_THROUGH_POSITION;
     private float strikeThroughFirstLinePosition = STRIKE_THROUGH_FIRST_LINE_POSITION;
+    private float strikeThroughBaseLineTop = STRIKE_THROUGH_BASE_LINE_TOP;
     private int strikeThroughColor = STRIKE_THROUGH_COLOR;
     private float strikeThroughStrokeWidth = STRIKE_THROUGH_STROKE_WIDTH;
     private long strikeThroughTotalTime = STRIKE_THROUGH_TOTAL_TIME;
@@ -63,7 +66,7 @@ public class StrikeThroughPainting implements IPainting {
     private boolean strikeThroughCutTextEdge = STRIKE_THROUGH_CUT_TEXT_EDGE;
 
     public StrikeThroughPainting(@NonNull ExTextView targetView) {
-        this.targetView =targetView;
+        this.targetView = targetView;
         this.targetView.addPainting(this);
         paint.setColor(strikeThroughColor);
         paint.setStrokeWidth(strikeThroughStrokeWidth);
@@ -225,12 +228,18 @@ public class StrikeThroughPainting implements IPainting {
      * @param distance How long the strike through line should be, -1 indicates a full line draw
      * @return The length of strike through line drawn
      */
+    private Paint bgPaint = new Paint() {{
+        setColor(0xFFFFFF33);
+    }};
     private float drawStrikeThroughLine(@NonNull Canvas canvas, int lineIndex, float distance) {
         Rect rect = lineRects.get(lineIndex);
-        float linePosition = lineIndex == 0 ?
-                strikeThroughFirstLinePosition : strikeThroughPosition;
-        float lineHeightOffset = targetView.getLineHeight() * lineIndex
-                + textHeight * linePosition;
+//        float linePosition = lineIndex == 0 ? strikeThroughFirstLinePosition : strikeThroughPosition;
+        float baseLineTop = targetView.getPaint().getTextSize() * strikeThroughBaseLineTop;
+        Paint.FontMetrics fontMetrics = targetView.getPaint().getFontMetrics();
+        float linePosition = -1 * fontMetrics.top - baseLineTop;
+        float lineTop = 0;
+        while (--lineIndex >= 0) lineTop += lineRects.get(lineIndex).height();
+        float lineHeightOffset = lineTop + linePosition;
         float howFarToGo = distance == -1 ? rect.width() : distance;
         canvas.drawLine(rect.left, lineHeightOffset, rect.left + howFarToGo, lineHeightOffset, paint);
         return howFarToGo;

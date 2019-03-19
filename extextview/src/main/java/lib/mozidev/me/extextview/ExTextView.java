@@ -33,7 +33,6 @@ public class ExTextView extends AppCompatTextView {
         if (paintings == null) {
             paintings = new ArrayList<>();
         }
-        // TODO: 加个 filter type，用来限制是否可以添加多个 painting
         paintings.add(painting);
     }
 
@@ -45,7 +44,7 @@ public class ExTextView extends AppCompatTextView {
             return ;
         }
 
-        if (paintings == null) {
+        if (paintings == null || paintings.size() == 0) {
             return ;
         }
 
