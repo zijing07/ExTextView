@@ -1,1 +1,2 @@
-include ':app', ':extextview'
+rootProject.name = 'ex-textview'
+include ':sample', ':extextview'

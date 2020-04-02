@@ -1,11 +1,10 @@
 package lib.mozidev.me.extextview;
 
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
 
 /**
  * created by zijing on 17/04/2018
  */
 public interface IPainting {
-    void onDraw(@NonNull Canvas canvas);
+    void onDraw(Canvas canvas);
 }
