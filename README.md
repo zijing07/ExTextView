@@ -1,6 +1,6 @@
 # ExTextView
 
-Android Extended TextView (know in Kotlin 🤩)
+Android Extended TextView (now in Kotlin 🤩)
 
 # Usage
 
