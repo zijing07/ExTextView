@@ -88,7 +88,7 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
      * @param callback StrikeThroughPaintingCallback
      * @return this
      */
-    fun callback(callback: StrikeThroughPaintingCallback): StrikeThroughPainting {
+    fun callback(callback: StrikeThroughPaintingCallback?): StrikeThroughPainting {
         strikeThroughPaintingCallback = callback
         return this
     }
