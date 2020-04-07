@@ -13,7 +13,6 @@ import android.graphics.Rect
  */
 class StrikeThroughPainting constructor(private val targetView: ExTextView) : IPainting {
 
-    private var strikeThroughPaintingCallback: StrikeThroughPaintingCallback? = null
     private val paint = Paint()
     private var drawStrikeThrough = false
     private var textHeight = 0f
@@ -26,7 +25,8 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
     private var strikeThroughTotalTime = STRIKE_THROUGH_TOTAL_TIME
     private var strikeThroughMode = STRIKE_THROUGH_MODE
     private var strikeThroughCutTextEdge = STRIKE_THROUGH_CUT_TEXT_EDGE
-
+    var strikeThroughPaintingCallback: StrikeThroughPaintingCallback? = null
+    
     /**
      * Set strike through line position
      * @param percentageOfHeight set position of the drawing line, percentage marks the
@@ -84,11 +84,12 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
     }
 
     /**
-     * Set callback called when the strike through drawing animation ends
+     * Set 
+     k called when the strike through drawing animation ends
      * @param callback StrikeThroughPaintingCallback
      * @return this
      */
-    fun callback(callback: StrikeThroughPaintingCallback?): StrikeThroughPainting {
+    fun callback(callback: StrikeThroughPaintingCallback): StrikeThroughPainting {
         strikeThroughPaintingCallback = callback
         return this
     }
