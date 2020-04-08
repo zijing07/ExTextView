@@ -21,7 +21,7 @@ allprojects {
 Step 2. Add the dependency
 ``` gradle
 dependencies {
-    implementation 'com.github.zijing07:ExTextView:v1.0.0'
+    implementation 'com.github.zijing07:ExTextView:${LATEST_VERSION}'
 }
 ```
 
@@ -43,13 +43,7 @@ strikeThroughPainting
     // differently to the following lines
     .firstLinePosition(0.6f) // default to 0.6F, since the first line is calculated
     .totalTime(10000L) // default to 1_000 milliseconds, aka 1s
-    .callback(object : StrikeThroughPainting.StrikeThroughPaintingCallback {  // default to null
-        override fun onStrikeThroughEnd() {
-            Snackbar.make(
-                findViewById(R.id.container),
-                "Callback after animation", Snackbar.LENGTH_LONG
-            ).show()
-        }
+    .callback{Snackbar.make(findViewById(R.id.container),"Callback after animation", Snackbar.LENGTH_LONG).show()}
     })
     .strikeThrough()
 
