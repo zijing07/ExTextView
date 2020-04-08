@@ -28,8 +28,8 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
     private var strikeThroughTotalTime = STRIKE_THROUGH_TOTAL_TIME
     private var strikeThroughMode = STRIKE_THROUGH_MODE
     private var strikeThroughCutTextEdge = STRIKE_THROUGH_CUT_TEXT_EDGE
-    var isStriked = true 
-        private set()
+    var isStriked: Boolean = true
+        private set
     
     /**
      * Set strike through line position
