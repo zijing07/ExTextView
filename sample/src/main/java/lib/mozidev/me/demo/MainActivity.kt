@@ -81,23 +81,15 @@ class MainActivity : AppCompatActivity() {
         }
         binding.button5.setOnClickListener {
             reset(binding.extendedTextView)
-            strikeThroughPainting // default to true
-                .cutTextEdge(cutEdge) // default to Color.BLACK
-                .color(strokeColor) // default to 2F px
-                .strokeWidth(strokeWidth) // default to StrikeThroughPainting.MODE_DEFAULT
-                .mode(StrikeThroughPainting.MODE_DEFAULT) // default to 0.65F
-                .linePosition(0.65f) // default to 0.6F, since the first line is calculated
-                // differently to the following lines
-                .firstLinePosition(0.6f) // default to 1_000 milliseconds, aka 1s
-                .totalTime(10000L) // default to null
-                .callback(object : StrikeThroughPainting.StrikeThroughPaintingCallback {
-                    override fun onStrikeThroughEnd() {
-                        Snackbar.make(
-                            findViewById(R.id.container),
-                            "Callback after animation", Snackbar.LENGTH_LONG
-                        ).show()
-                    }
-                })
+            strikeThroughPainting
+                .cutTextEdge(cutEdge)
+                .color(strokeColor)
+                .strokeWidth(strokeWidth)
+                .linePosition(0.65f)
+                .callback { Snackbar.make(
+                    findViewById(R.id.container),
+                    "Callback after animation", Snackbar.LENGTH_LONG
+                ).show()}
                 .strikeThrough()
         }
         binding.button4.setOnClickListener { reset(binding.extendedTextView) }

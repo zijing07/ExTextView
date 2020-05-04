@@ -1,6 +1,6 @@
 # ExTextView
 
-Android Extended TextView (know in Kotlin 🤩)
+Android Extended TextView (now in Kotlin 🤩)
 
 # Usage
 
@@ -21,7 +21,7 @@ allprojects {
 Step 2. Add the dependency
 ``` gradle
 dependencies {
-    implementation 'com.github.zijing07:ExTextView:v1.0.0'
+    implementation 'com.github.zijing07:ExTextView:${LATEST_VERSION}'
 }
 ```
 
@@ -34,22 +34,16 @@ strikeThroughPainting = StrikeThroughPainting(tv)
 strikeThroughPainting.strikeThrough()
 
 // All Options
-strikeThroughPainting // default to true
-    .cutTextEdge(cutEdge) // default to Color.BLACK
-    .color(strokeColor) // default to 2F px
-    .strokeWidth(strokeWidth) // default to StrikeThroughPainting.MODE_DEFAULT
-    .mode(StrikeThroughPainting.MODE_DEFAULT) // default to 0.65F
-    .linePosition(0.65f) // default to 0.6F, since the first line is calculated
+strikeThroughPainting
+    .cutTextEdge(cutEdge) // default to true
+    .color(strokeColor) // default to Color.BLACK
+    .strokeWidth(strokeWidth) // default to 2F px
+    .mode(StrikeThroughPainting.MODE_DEFAULT) // default to StrikeThroughPainting.MODE_DEFAULT
+    .linePosition(0.65f) // default to 0.65F
     // differently to the following lines
-    .firstLinePosition(0.6f) // default to 1_000 milliseconds, aka 1s
-    .totalTime(10000L) // default to null
-    .callback(object : StrikeThroughPainting.StrikeThroughPaintingCallback {
-        override fun onStrikeThroughEnd() {
-            Snackbar.make(
-                findViewById(R.id.container),
-                "Callback after animation", Snackbar.LENGTH_LONG
-            ).show()
-        }
+    .firstLinePosition(0.6f) // default to 0.6F, since the first line is calculated
+    .totalTime(10000L) // default to 1_000 milliseconds, aka 1s
+    .callback{Snackbar.make(findViewById(R.id.container),"Callback after animation", Snackbar.LENGTH_LONG).show()}
     })
     .strikeThrough()
 

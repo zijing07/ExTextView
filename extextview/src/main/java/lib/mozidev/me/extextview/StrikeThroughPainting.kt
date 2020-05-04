@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package lib.mozidev.me.extextview
 
 import android.animation.Animator
@@ -26,7 +28,9 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
     private var strikeThroughTotalTime = STRIKE_THROUGH_TOTAL_TIME
     private var strikeThroughMode = STRIKE_THROUGH_MODE
     private var strikeThroughCutTextEdge = STRIKE_THROUGH_CUT_TEXT_EDGE
-
+    var isStriked: Boolean = false
+        private set
+    
     /**
      * Set strike through line position
      * @param percentageOfHeight set position of the drawing line, percentage marks the
@@ -88,8 +92,15 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
      * @param callback StrikeThroughPaintingCallback
      * @return this
      */
-    fun callback(callback: StrikeThroughPaintingCallback): StrikeThroughPainting {
-        strikeThroughPaintingCallback = callback
+    fun callback(callback: (() -> Unit)?): StrikeThroughPainting {
+        strikeThroughPaintingCallback = null
+        callback?.let {
+            strikeThroughPaintingCallback = object : StrikeThroughPaintingCallback {
+                override fun onStrikeThroughEnd() {
+                    callback.invoke()
+                }
+            }
+        }
         return this
     }
 
@@ -120,16 +131,15 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
      * Start strike through animation
      */
     fun strikeThrough() {
-        targetView.post {
-            prepareAnimation()
-            startAnimation()
-        }
+        prepareAnimation()
+        startAnimation()
     }
 
     /**
      * Dismiss the strikeThrough line
      */
     fun clearStrikeThrough() {
+        isStriked = false
         drawStrikeThrough = false
         strikeThroughProgress = 0f
         targetView.invalidate()
@@ -166,7 +176,9 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
      * @param distance How long the strike through line should be, -1 indicates a full line draw
      * @return The length of strike through line drawn
      */
-    private fun drawStrikeThroughLine(canvas: Canvas, lineIndex: Int, distance: Float = -1f): Float {
+    private fun drawStrikeThroughLine(
+        canvas: Canvas, lineIndex: Int, distance: Float = -1f
+    ): Float {
         var lIndex = lineIndex
         val rect = lineRects[lIndex]
         //        float linePosition = lineIndex == 0 ? strikeThroughFirstLinePosition : strikeThroughPosition;
@@ -260,6 +272,7 @@ class StrikeThroughPainting constructor(private val targetView: ExTextView) : IP
         animator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
+                isStriked = true //since we only animate on strike
                 strikeThroughPaintingCallback?.onStrikeThroughEnd()
             }
         })
